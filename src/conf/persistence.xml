@@ -2,7 +2,22 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="proyectMecappPU" transaction-type="JTA">
     <jta-data-source>jdbc/mecapp</jta-data-source>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties/>
+    <class>entity.Factura</class>
+    <class>entity.Insumos</class>
+    <class>entity.Manodeobra</class>
+    <class>entity.Marcavehiculo</class>
+    <class>entity.Modelovehiculo</class>
+    <class>entity.Persona</class>
+    <class>entity.Reserva</class>
+    <class>entity.ReservaManodeobra</class>
+    <class>entity.ReservaTiposervicio</class>
+    <class>entity.Tiposervicio</class>
+    <class>entity.Tipousuario</class>
+    <class>entity.Usuario</class>
+    <class>entity.Vehiculo</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties>
+      <property name="eclipselink.logging.level" value="FINEST"/>
+    </properties>
   </persistence-unit>
 </persistence>

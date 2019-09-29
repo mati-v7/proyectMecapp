@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
     Document   : index
     Created on : 04/09/2019, 04:21:27 PM
@@ -31,12 +32,18 @@
             <div class="row">
                 <div class="col-md-4">
                     <h2><font>Titulo</font></h2>
+                    <c:forEach var="model" items="${modelos}">
+                    <p>${model.idmodeloVehiculo}  ${model.modeloVehiculo}</p>
+                    </c:forEach>
                     <p>Descripcion...</p>
                     <p><a href="#" class="btn btn-primary btn-lg" role="button">Ver detalles...</a></p>
                 </div>
 
                 <div class="col-md-4">
-                    <h2><font>Titulo</font></h2>
+                    <h2><font>Marcas</font></h2>
+                    <c:forEach var="marc" items="${marcas}">
+                    <p>${marc.idmarcaVehiculo}  ${marc.marcaVehiculo}</p>
+                    </c:forEach>
                     <p>Descripcion...</p>
                     <p><a href="#" class="btn btn-primary btn-lg" role="button">Ver detalles...</a></p>
                 </div>

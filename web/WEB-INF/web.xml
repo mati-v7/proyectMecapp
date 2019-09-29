@@ -39,10 +39,10 @@
             <include-coda>/WEB-INF/jspfy/footer.jspf</include-coda>
         </jsp-property-group>
     </jsp-config>
-    <resource-ref>
+    <!--<resource-ref>
         <res-ref-name>jdbc/mecapp</res-ref-name>
         <res-type>javax.sql.ConnectionPoolDataSource</res-type>
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
-    </resource-ref>
+    </resource-ref>-->
 </web-app>

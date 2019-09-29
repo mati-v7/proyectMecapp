@@ -6,11 +6,16 @@
 package controller;
 
 import java.io.IOException;
+import javax.ejb.EJB;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import session.MarcavehiculoFacade;
+import session.ModelovehiculoFacade;
+
 
 /**
  *
@@ -32,7 +37,16 @@ import javax.servlet.http.HttpServletResponse;
             "/confirmarCita"
         })
 public class ControllerServlet extends HttpServlet {
-
+    
+    @EJB
+    private MarcavehiculoFacade mf;
+    @EJB
+    private ModelovehiculoFacade facade;
+    
+    @Override
+    public void init() throws ServletException{
+        
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -60,6 +74,9 @@ public class ControllerServlet extends HttpServlet {
         //Si se solicita la pagina de registro vehicular
         if (userPath.equals("/car_record")) {
             // TODO: Implementar la solicitud de registro vehicular
+            request.setAttribute("marcas", mf.findAll());
+            request.setAttribute("modelos", facade.getModeloForMarca());
+            
         }
 
         //Si se solicita la pagina de agendamiento

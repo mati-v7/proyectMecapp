@@ -1,9 +1,13 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%-- 
     Document   : visit_registration
     Created on : 04/09/2019, 04:31:14 PM
     Author     : Windows10
 --%>
-
+<sql:query var="servicio" dataSource="jdbc/mecapp">
+    SELECT tipoServicio FROM tiposervicio
+</sql:query>
 
 <body>
     <header>
@@ -22,8 +26,9 @@
                     <div class="form-group">
                         <label for="inputServ" class="sr-only">Servicio</label>
                         <select class="form-control custom-select" id="inputServ" aria-describedby="servHelp">
-                            <option value="">Mantenimiento Periodico</option>
-                            <option value="">Reparaciones Especificas</option>
+                            <c:forEach var="serv" items="${servicio.rows}">
+                                <option value="">${serv.tipoServicio}</option>
+                            </c:forEach>
                             <option value="">Ambos</option>
                         </select>
                         <small id="servHelp" class="form-text text-muted">
