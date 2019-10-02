@@ -6,6 +6,7 @@
 package session;
 
 import entity.Persona;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,11 @@ public class PersonaFacade extends AbstractFacade<Persona> {
 
     public PersonaFacade() {
         super(Persona.class);
+        
     }
     
+    public List<Persona> findForCedula (Persona p){
+        return em.createQuery("SELECT p FROM Persona p WHERE p.cedPersona = :cedPersona").setParameter("cedPersona", p.getCedPersona()).getResultList();          
+    }
+     
 }

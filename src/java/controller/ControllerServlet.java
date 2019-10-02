@@ -125,6 +125,13 @@ public class ControllerServlet extends HttpServlet {
         //Si se llama a la accion registar usuario
         if (userPath.equals("/registrarUsuario")) {
             // TODO: Implementar la solicitud de accion registro de usuario
+            //1 paso -- Recuperar datos del formulario
+            //2 paso -- Validar CI o RUC
+            //3 paso -- Consultar si la persona con CI o RUC existe
+            //4 paso -- Crear perManager EJB con un contenedor para las transacciones
+            //5 paso -- Crear un metodo dentro del contenedor que nos permita hacer las acciones de persistencia
+            //6 paso -- Implementar dentro los metodos Helper
+            //7 paso -- 
         }
 
         //Si se llama a la accion registrar vehiculo

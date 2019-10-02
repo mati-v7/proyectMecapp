@@ -68,13 +68,14 @@
                     </div>    
 
                     <div class="form-group">
-                        <img src="" class="img-thumbnail"/>
+                        <img src="${initParam.imageRegistPath}phone.png" height="42" width="42" class="img-thumbnail"/>
+                        
                         <label for="radio1" class="radio-inline">
                             <input type="radio" name="rdContacto" value="" id="radio1"/>Tel:
                         </label>
                         
 
-                        <img src="" class="img-thumbnail"/>
+                        <img src="${initParam.imageRegistPath}mail.png" height="42" width="42" class="img-thumbnail"/>
                          <label for="radio2" class="radio-inline">
                             <input type="radio" name="rdContacto" value="" id="radio2"/>Email:
                         </label>
