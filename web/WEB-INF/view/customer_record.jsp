@@ -18,25 +18,25 @@
                     <h2>Datos Personales</h2>
                     <div class="form-group">
                         <label for="inputName" class="sr-only">Nombre</label>
-                        <input type="text" name="" id="inputName" class="form-control" placeholder="Nombre" required autofocus>
+                        <input type="text" name="txtNombre" id="inputName" class="form-control" placeholder="Nombre" required autofocus>
                     </div>
 
                     <div class="form-group">
                         <label for="inputLastName" class="sr-only">Apellido</label>
-                        <input type="text" name="" id="inputLastName" class="form-control" placeholder="Apellido" required>
+                        <input type="text" name="txtApellido" id="inputLastName" class="form-control" placeholder="Apellido" required>
                     </div>
 
                     <div class="form-group">
                         <label for="select" class="sr-only">Elige una opción:</label>
                         <div class="input-group">
-                            <select id="select" class="form-control custom-select">
-                                <option value="">Ci</option>
-                                <option value="">RUC</option>
+                            <select id="select" name="combDoc" class="form-control custom-select">
+                                <option value="1">Ci</option>
+                                <option value="2">RUC</option>
                             </select>
-                            <input type="text" name="" class="form-control input-group-addon" placeholder="CI o RUC" required>
+                            <input type="text" name="txtDoc" class="form-control input-group-addon" placeholder="CI o RUC" required>
                         </div>
                     </div>
-
+                    <!--
                     <div class="form-group">
                         <label for="inputPass" class="sr-only">Contraseña:</label>
                         <input type="password" name="" class="form-control" placeholder="Contraseña" required>
@@ -45,7 +45,7 @@
                     <div class="form-group">
                         <label for="inputRePass" class="sr-only">Reescriba la contraseña:</label>
                         <input type="password" name="" class="form-control" placeholder="Reescriba la contraseña" required>
-                    </div>
+                    </div>-->
 
                 </div>
 
@@ -54,19 +54,19 @@
 
                     <div class="form-group">
                         <label for="inputDir" class="sr-only">Dirección</label>
-                        <input type="text" name="" id="inputDir" class="form-control" placeholder="Dirección" required>
+                        <input type="text" name="txtDireccion" id="inputDir" class="form-control" placeholder="Dirección" required>
                     </div>
 
                     <div class="form-group">
                         <label for="inputTel" class="sr-only">Telefono</label>
-                        <input type="tel" name="" id="inputTel" class="form-control" placeholder="Telefono" required>
+                        <input type="tel" name="txtTelefono" id="inputTel" class="form-control" placeholder="Telefono" required>
                     </div>
 
                     <div class="form-group">
                         <label for="inputEmail" class="sr-only">Correo electronico</label>
-                        <input type="email" name="" id="inputEmail" class="form-control" placeholder="Correo electronico" required>
+                        <input type="email" name="txtEmail" id="inputEmail" class="form-control" placeholder="Correo electronico" required>
                     </div>    
-
+                    <!--
                     <div class="form-group">
                         <img src="${initParam.imageRegistPath}phone.png" height="42" width="42" class="img-thumbnail"/>
                         
@@ -85,7 +85,7 @@
                             <input type="radio" name="rdContacto" value="" id="radio3"/>Ambos:
                         </label>
 
-                    </div>
+                    </div>-->
                 </div>
                 <div class="form-group">
                     <div class="col-md-2">
