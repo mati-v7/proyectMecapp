@@ -6,6 +6,9 @@
 package session;
 
 import entity.Persona;
+import entity.Tipousuario;
+import entity.Usuario;
+import java.util.Date;
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
@@ -23,27 +26,44 @@ import javax.persistence.PersistenceContext;
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class TransManager {
-    
+
     @PersistenceContext(unitName = "proyectMecappPU")
     private EntityManager em;
-    
+
     @Resource
     private SessionContext context;
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public int registOrder(String nombre, String apellido, String doc, String direccion, String telefono, String email) {
+    public int registOrder(String nombre, String apellido, String doc, String direccion, String telefono, String email, String tipo, String pass) {
+        Persona p;
+        Tipousuario tu;
         try {
-            Persona p = addPersona(nombre, apellido, doc, direccion, telefono, email);
-            return p.getIdpersona();
+            if (tipo.equals(1)) {
+                //Si el usuario eligio CI, tipo es igual a 1
+                p = em.createNamedQuery("Persona.findByCedPersona", Persona.class).setParameter("cedPersona", doc).getSingleResult();
+                if (p.getIdpersona() == null) {
+                    p = addPersona(nombre, apellido, doc, direccion, telefono, email);
+                    tu = em.find(Tipousuario.class, 1);
+                    addUsuario(pass, p, tu);
+                }else{
+                    tu = em.find(Tipousuario.class, 1);
+                    addUsuario(pass, p, tu);
+                }
+            }else if(tipo.equals(2)){
+                //Si el usuario eligio RUC, tipo es igual a 2
+ 
+            }
+            return 1;
+
         } catch (Exception e) {
             context.setRollbackOnly();
             return 0;
-        } 
+        }
     }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-
+    
     private Persona addPersona(String nombre, String apellido, String doc, String direccion, String telefono, String email) {
         Persona persona = new Persona();
         persona.setNombrePersona(nombre);
@@ -55,5 +75,16 @@ public class TransManager {
         em.persist(persona);
         em.flush();
         return persona;
+    }
+    
+
+    private void addUsuario(String pass, Persona p, Tipousuario tipoUsuarioidtipoUsuario) {
+        Usuario u = new Usuario();
+        u.setPassUsuario(pass);
+        u.setPersonaIdpersona(p);
+        u.setTipoUsuarioidtipoUsuario(tipoUsuarioidtipoUsuario);
+        Date d = null;
+        u.setCreadoUsuario(d);
+        em.persist(u);
     }
 }

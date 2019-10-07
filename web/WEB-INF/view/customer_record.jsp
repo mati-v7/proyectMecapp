@@ -36,16 +36,16 @@
                             <input type="text" name="txtDoc" class="form-control input-group-addon" placeholder="CI o RUC" required>
                         </div>
                     </div>
-                    <!--
+                    
                     <div class="form-group">
                         <label for="inputPass" class="sr-only">Contraseña:</label>
-                        <input type="password" name="" class="form-control" placeholder="Contraseña" required>
+                        <input type="password" name="txtPass" class="form-control" placeholder="Contraseña" required>
                     </div>
 
                     <div class="form-group">
                         <label for="inputRePass" class="sr-only">Reescriba la contraseña:</label>
                         <input type="password" name="" class="form-control" placeholder="Reescriba la contraseña" required>
-                    </div>-->
+                    </div>
 
                 </div>
 
@@ -66,8 +66,8 @@
                         <label for="inputEmail" class="sr-only">Correo electronico</label>
                         <input type="email" name="txtEmail" id="inputEmail" class="form-control" placeholder="Correo electronico" required>
                     </div>    
-                    <!--
-                    <div class="form-group">
+                    
+                   <!-- <div class="form-group">
                         <img src="${initParam.imageRegistPath}phone.png" height="42" width="42" class="img-thumbnail"/>
                         
                         <label for="radio1" class="radio-inline">
@@ -83,9 +83,9 @@
                         <img src="" class="img-thumbnail"/>
                          <label for="radio3" class="radio-inline">
                             <input type="radio" name="rdContacto" value="" id="radio3"/>Ambos:
-                        </label>
+                        </label>-->
 
-                    </div>-->
+                    </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-2">

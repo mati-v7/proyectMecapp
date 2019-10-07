@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import session.MarcavehiculoFacade;
 import session.ModelovehiculoFacade;
+import session.TipousuarioFacade;
 import session.TransManager;
 
 /**
@@ -44,10 +45,12 @@ public class ControllerServlet extends HttpServlet {
     private ModelovehiculoFacade facade;
     @EJB
     private TransManager transManager;
+    @EJB
+    private TipousuarioFacade tuf;
 
     @Override
     public void init() throws ServletException {
-
+         getServletContext().setAttribute("tipos", tuf.find(1));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -81,7 +84,7 @@ public class ControllerServlet extends HttpServlet {
             case "/car_record":
                 // TODO: Implementar la solicitud de registro vehicular
                 request.setAttribute("marcas", mf.findAll());
-                request.setAttribute("modelos", facade.getModeloForMarca());
+                request.setAttribute("modelos", facade.getModeloForMarca(1));
                 break;
 
             //Si se solicita la pagina de agendamiento
@@ -143,10 +146,11 @@ public class ControllerServlet extends HttpServlet {
                 String direccion = request.getParameter("txtDireccion");
                 String telefono = request.getParameter("txtTelefono");
                 String email = request.getParameter("txtEmail");
+                String pass = request.getParameter("txtPass");
                 //2 paso -- Validar CI o RUC
                 //3 paso -- Consultar si la persona con CI o RUC existe
-                //4 paso -- Crear perManager EJB con un contenedor para las transacciones
-                int result = transManager.registOrder(nombre, apellido, doc, direccion, telefono, email);
+                //4 paso -- Crear Manager EJB con un contenedor para las transacciones
+                int result = transManager.registOrder(nombre, apellido, doc, direccion, telefono, email, tipodoc, pass);
                 //5 paso -- Crear un metodo dentro del contenedor que nos permita hacer las acciones de persistencia
                 //6 paso -- Implementar dentro los metodos Helper
                 //7 paso -- 

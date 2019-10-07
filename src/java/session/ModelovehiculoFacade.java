@@ -37,12 +37,12 @@ public class ModelovehiculoFacade extends AbstractFacade<Modelovehiculo> {
         super(Modelovehiculo.class);
     }
     
-    public List<Modelovehiculo> getModeloForMarca() {
+    public List<Modelovehiculo> getModeloForMarca(int marca) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery <Modelovehiculo> cq = cb.createQuery(Modelovehiculo.class);
         Root <Modelovehiculo> model = cq.from(Modelovehiculo.class);
         cq.select(model);
-        cq.where(model.get(Modelovehiculo_.marcaVehiculoidmarcaVehiculo).in(1));
+        cq.where(model.get(Modelovehiculo_.marcaVehiculoidmarcaVehiculo).in(marca));
         //Join<Modelovehiculo,Marcavehiculo> join = model.join(Modelovehiculo_.marcaVehiculoidmarcaVehiculo);
         TypedQuery <Modelovehiculo> q = em.createQuery(cq);
         return q.getResultList();

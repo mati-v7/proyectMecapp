@@ -21,6 +21,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -50,7 +51,7 @@ public class Usuario implements Serializable {
     @Column(name = "pass_usuario")
     private String passUsuario;
     @Basic(optional = false)
-    @NotNull
+    @Null
     @Column(name = "creado_usuario")
     @Temporal(TemporalType.TIMESTAMP)
     private Date creadoUsuario;
