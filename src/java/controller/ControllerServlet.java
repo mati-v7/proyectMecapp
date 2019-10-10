@@ -5,6 +5,7 @@
  */
 package controller;
 
+import entity.Persona;
 import java.io.IOException;
 import javax.ejb.EJB;
 
@@ -126,36 +127,34 @@ public class ControllerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String email, pass;
         String userPath = request.getServletPath();
 
         switch (userPath) {
             //Si se llama a la accion iniciar sesion
             case "/iniciarSesion":
                 // TODO: Implementar la solicitud de accion inicio de sesion
+                 email = request.getParameter("txtEmail");
+                 pass = request.getParameter("txtPass");
+                
+                Boolean flag = transManager.login(email, pass);
 
                 break;
 
             //Si se llama a la accion registar usuario
             case "/registrarUsuario":
-
-                //1 paso -- Recuperar datos del formulario
+                
                 String nombre = request.getParameter("txtNombre");
                 String apellido = request.getParameter("txtApellido");
                 String tipodoc = request.getParameter("combDoc");
                 String doc = request.getParameter("txtDoc");
                 String direccion = request.getParameter("txtDireccion");
                 String telefono = request.getParameter("txtTelefono");
-                String email = request.getParameter("txtEmail");
-                String pass = request.getParameter("txtPass");
-                //2 paso -- Validar CI o RUC
-                //3 paso -- Consultar si la persona con CI o RUC existe
-                //4 paso -- Crear Manager EJB con un contenedor para las transacciones
-                int result = transManager.registOrder(nombre, apellido, doc, direccion, telefono, email, tipodoc, pass);
-                //5 paso -- Crear un metodo dentro del contenedor que nos permita hacer las acciones de persistencia
-                //6 paso -- Implementar dentro los metodos Helper
-                //7 paso -- 
+                email = request.getParameter("txtEmail");
+                pass = request.getParameter("txtPass");
+                Persona result = transManager.registOrder(nombre, apellido, doc, direccion, telefono, email, tipodoc, pass);
+                
                 userPath = "/login";
-
                 break;
 
             //Si se llama a la accion registrar vehiculo

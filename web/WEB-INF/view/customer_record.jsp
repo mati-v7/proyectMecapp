@@ -66,24 +66,6 @@
                         <label for="inputEmail" class="sr-only">Correo electronico</label>
                         <input type="email" name="txtEmail" id="inputEmail" class="form-control" placeholder="Correo electronico" required>
                     </div>    
-                    
-                   <!-- <div class="form-group">
-                        <img src="${initParam.imageRegistPath}phone.png" height="42" width="42" class="img-thumbnail"/>
-                        
-                        <label for="radio1" class="radio-inline">
-                            <input type="radio" name="rdContacto" value="" id="radio1"/>Tel:
-                        </label>
-                        
-
-                        <img src="${initParam.imageRegistPath}mail.png" height="42" width="42" class="img-thumbnail"/>
-                         <label for="radio2" class="radio-inline">
-                            <input type="radio" name="rdContacto" value="" id="radio2"/>Email:
-                        </label>
-
-                        <img src="" class="img-thumbnail"/>
-                         <label for="radio3" class="radio-inline">
-                            <input type="radio" name="rdContacto" value="" id="radio3"/>Ambos:
-                        </label>-->
 
                     </div>
                 </div>

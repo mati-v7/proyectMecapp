@@ -30,9 +30,5 @@ public class PersonaFacade extends AbstractFacade<Persona> {
         super(Persona.class);
         
     }
-    
-    public List<Persona> findForCedula (Persona p){
-        return em.createQuery("SELECT p FROM Persona p WHERE p.cedPersona = :cedPersona").setParameter("cedPersona", p.getCedPersona()).getResultList();          
-    }
      
 }
