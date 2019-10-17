@@ -5,10 +5,11 @@
  */
 package controller;
 
+import entity.Modelovehiculo;
 import entity.Persona;
 import java.io.IOException;
+import java.util.List;
 import javax.ejb.EJB;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,22 +37,22 @@ import session.TransManager;
             "/registrarUsuario",
             "/registrarVehiculo",
             "/encontrarVehiculo",
-            "/confirmarCita"
-        })
+            "/confirmarCita",})
 public class ControllerServlet extends HttpServlet {
 
     @EJB
     private MarcavehiculoFacade mf;
     @EJB
-    private ModelovehiculoFacade facade;
+    private ModelovehiculoFacade modf;
     @EJB
     private TransManager transManager;
-    @EJB
-    private TipousuarioFacade tuf;
+
+    boolean flag = false;
+    boolean added = false;
 
     @Override
     public void init() throws ServletException {
-         getServletContext().setAttribute("tipos", tuf.find(1));
+        //getServletContext().setAttribute("tipos", tuf.find(1));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -84,8 +85,35 @@ public class ControllerServlet extends HttpServlet {
             //Si se solicita la pagina de registro vehicular
             case "/car_record":
                 // TODO: Implementar la solicitud de registro vehicular
-                request.setAttribute("marcas", mf.findAll());
-                request.setAttribute("modelos", facade.getModeloForMarca(1));
+                if (flag == false) {
+                    request.setAttribute("marcas", mf.findAll());
+                    flag = true;
+                } else {
+                    String targetId = request.getParameter("id");
+                    StringBuilder sb = new StringBuilder();
+
+                    if (!targetId.equals("")) {
+                        List result = modf.getModeloForMarca(Integer.parseInt(targetId));
+                        if (!result.isEmpty()) {
+                            for (int i = 0; i < result.size(); i++) {
+                                Modelovehiculo modelo = (Modelovehiculo) result.get(i);
+                                sb.append("<modelovehiculo>");
+                                sb.append("<idmodelovehiculo>").append(modelo.getIdmodeloVehiculo()).append("</idmodelovehiculo>");
+                                sb.append("<modelo>").append(modelo.getModeloVehiculo()).append("</modelo>");
+                                sb.append("</modelovehiculo>");
+                            }
+                            added = true;
+                        }
+                        if (added) {
+                            response.setContentType("text/xml");
+                            response.setHeader("Cache-Control", "no-cache");
+                            response.getWriter().write("<modelos>" + sb.toString() + "</modelos>");
+
+                        } else {
+                            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                        }
+                    }
+                }
                 break;
 
             //Si se solicita la pagina de agendamiento
@@ -110,7 +138,7 @@ public class ControllerServlet extends HttpServlet {
         String url = "/WEB-INF/view" + userPath + ".jsp";
 
         try {
-            request.getRequestDispatcher(url).forward(request, response);
+                request.getRequestDispatcher(url).forward(request, response);
         } catch (IOException | ServletException e) {
             e.printStackTrace();
         }
@@ -134,16 +162,15 @@ public class ControllerServlet extends HttpServlet {
             //Si se llama a la accion iniciar sesion
             case "/iniciarSesion":
                 // TODO: Implementar la solicitud de accion inicio de sesion
-                 email = request.getParameter("txtEmail");
-                 pass = request.getParameter("txtPass");
-                
-                Boolean flag = transManager.login(email, pass);
+                email = request.getParameter("txtEmail");
+                pass = request.getParameter("txtPass");
 
+                //Boolean flag = transManager.login(email, pass);
                 break;
 
             //Si se llama a la accion registar usuario
             case "/registrarUsuario":
-                
+
                 String nombre = request.getParameter("txtNombre");
                 String apellido = request.getParameter("txtApellido");
                 String tipodoc = request.getParameter("combDoc");
@@ -153,7 +180,7 @@ public class ControllerServlet extends HttpServlet {
                 email = request.getParameter("txtEmail");
                 pass = request.getParameter("txtPass");
                 Persona result = transManager.registOrder(nombre, apellido, doc, direccion, telefono, email, tipodoc, pass);
-                
+
                 userPath = "/login";
                 break;
 
