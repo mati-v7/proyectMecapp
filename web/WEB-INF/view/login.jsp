@@ -23,17 +23,17 @@
 
                     <div class="form-group">
                         <label for="inputEmail" class="sr-only">Dirección de correo electrónico</label>
-                        <input type="email" name="txtEmail" id="inputEmail" class="form-control" placeholder="Correo electrónico" required autofocus/>
+                        <input type="email" name="txtEmail" id="inputEmail" class="form-control" placeholder="Correo electrónico" />
                     </div>
 
                     <div class="form-group">
                         <label for="inputPassword" class="sr-only">Contraseña</label>
-                        <input type="password" name="txtPass" id="inputPassword" class="form-control" placeholder="Contraseña" required/>
+                        <input type="password" name="txtPass" id="inputPassword" class="form-control" placeholder="Contraseña" />
                     </div>
 
 
                     <div class="form-group">
-                        <button name="" type="submit" class="btn btn-primary">Iniciar Sesion</button>
+                        <a href="find_car" class="btn btn-primary" role="button">Iniciar Sesion</a>
                     </div>
                 </form>
             </div>

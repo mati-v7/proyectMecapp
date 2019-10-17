@@ -34,9 +34,6 @@
                         <label for="inputModel">Modelo</label>
                         <select class="form-control custom-select" id="inputModel">
                             <option selected>Seleccione un modelo</option>
-                            <c:forEach var="modelo" items="${modelos}">
-                                <option value="">${modelo.modeloVehiculo}</option>
-                            </c:forEach>
                            
                         </select>
                     </div>
@@ -62,9 +59,10 @@
                         <c:forEach var="marca" items="${marcas}">
                             <img src="" class="img-thumbnail"/>
                             <label for="radio1" class="radio-inline">
-                                <input type="radio" name="rdContacto" value="" id="radio" >${marca.marcaVehiculo}
+                                <input type="radio" name="rdContacto" value="${marca.idmarcaVehiculo}" id="radio" onchange="loadModel(this.value)">${marca.marcaVehiculo}
                             </label>
                         </c:forEach>
+                            <p id="demo"></p>
                     </div>
 
                 </div>
