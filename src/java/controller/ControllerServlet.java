@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import session.MarcavehiculoFacade;
 import session.ModelovehiculoFacade;
-import session.TipousuarioFacade;
 import session.TransManager;
 
 /**
@@ -37,7 +36,9 @@ import session.TransManager;
             "/registrarUsuario",
             "/registrarVehiculo",
             "/encontrarVehiculo",
-            "/confirmarCita",})
+            "/confirmarCita",
+            "/updatemodelo"
+        })
 public class ControllerServlet extends HttpServlet {
 
     @EJB
@@ -85,35 +86,7 @@ public class ControllerServlet extends HttpServlet {
             //Si se solicita la pagina de registro vehicular
             case "/car_record":
                 // TODO: Implementar la solicitud de registro vehicular
-                if (flag == false) {
                     request.setAttribute("marcas", mf.findAll());
-                    flag = true;
-                } else {
-                    String targetId = request.getParameter("id");
-                    StringBuilder sb = new StringBuilder();
-
-                    if (!targetId.equals("")) {
-                        List result = modf.getModeloForMarca(Integer.parseInt(targetId));
-                        if (!result.isEmpty()) {
-                            for (int i = 0; i < result.size(); i++) {
-                                Modelovehiculo modelo = (Modelovehiculo) result.get(i);
-                                sb.append("<modelovehiculo>");
-                                sb.append("<idmodelovehiculo>").append(modelo.getIdmodeloVehiculo()).append("</idmodelovehiculo>");
-                                sb.append("<modelo>").append(modelo.getModeloVehiculo()).append("</modelo>");
-                                sb.append("</modelovehiculo>");
-                            }
-                            added = true;
-                        }
-                        if (added) {
-                            response.setContentType("text/xml");
-                            response.setHeader("Cache-Control", "no-cache");
-                            response.getWriter().write("<modelos>" + sb.toString() + "</modelos>");
-
-                        } else {
-                            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
-                        }
-                    }
-                }
                 break;
 
             //Si se solicita la pagina de agendamiento
@@ -132,13 +105,44 @@ public class ControllerServlet extends HttpServlet {
                 // TODO: Implementar la solicitud de confirmacion de cita
 
                 break;
+            case "/updatemodelo":
+                String targetId = request.getParameter("id");
+                StringBuilder sb = new StringBuilder();
+
+                if (!targetId.equals("")) {
+                    List result = modf.getModeloForMarca(Integer.parseInt(targetId));
+                    if (!result.isEmpty()) {
+                        for (int i = 0; i < result.size(); i++) {
+                            Modelovehiculo modelo = (Modelovehiculo) result.get(i);
+                            sb.append("<modelovehiculo>");
+                            sb.append("<idmodelovehiculo>").append(modelo.getIdmodeloVehiculo()).append("</idmodelovehiculo>");
+                            sb.append("<modelo>").append(modelo.getModeloVehiculo()).append("</modelo>");
+                            sb.append("</modelovehiculo>");
+                        }
+                        added = true;
+                    } else {
+                        added = false;
+                    }
+                    if (added) {
+                        response.setContentType("text/xml");
+                        response.setHeader("Cache-Control", "no-cache");
+                        response.getWriter().write("<modelos>" + sb.toString() + "</modelos>");
+                            
+                    } else {
+                        response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                    }
+                }
+                break;         
         }
 
         //Usa RequestDispatcher para reenviar la solicitud internamente
         String url = "/WEB-INF/view" + userPath + ".jsp";
 
         try {
+            if (!userPath.equals("/updatemodelo")) {
                 request.getRequestDispatcher(url).forward(request, response);
+            }
+
         } catch (IOException | ServletException e) {
             e.printStackTrace();
         }

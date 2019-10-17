@@ -14,7 +14,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
-import javax.ejb.EJB;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -33,9 +32,6 @@ import javax.persistence.Query;
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class TransManager {
-
-    @EJB
-    private UsuarioFacade usuarioFacade;
 
     @PersistenceContext(unitName = "proyectMecappPU")
     private EntityManager em;
@@ -69,7 +65,7 @@ public class TransManager {
             } else if (tipo.equals("2")) {
                 //Si el usuario eligio RUC, tipo es igual a 2
                 String[] parts = doc.split("-");
-                query = em.createNamedQuery("Persona.findByRucPersona").setParameter("rucPersona", parts[1]);
+                query = em.createQuery("SELECT p FROM Persona p WHERE p.rucPersona = :rucPersona AND p.cedPersona = :cedPersona").setParameter("cedPersona", parts[0]).setParameter("rucPersona", parts[1]);
                 results = query.getResultList();
 
                 if (!results.isEmpty()) {
@@ -157,7 +153,7 @@ public class TransManager {
                 if(p != null){
                     
                 }else{
-                
+                 
                 }
             }else{
             

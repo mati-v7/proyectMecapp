@@ -33,8 +33,8 @@
                     <div class="form-group">
                         <label for="inputModel">Modelo</label>
                         <select class="form-control custom-select" id="inputModel">
-                            <option selected>Seleccione un modelo</option>
-                           
+                            <option selected>Seleccione una marca para ver modelos</option>
+                            
                         </select>
                     </div>
                     <div class="form-group">

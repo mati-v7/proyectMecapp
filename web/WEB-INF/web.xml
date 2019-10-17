@@ -24,6 +24,7 @@
         <url-pattern>/registrarVehiculo</url-pattern>
         <url-pattern>/encontrarVehiculo</url-pattern>
         <url-pattern>/confirmarCita</url-pattern>
+        <url-pattern>/updatemodelo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

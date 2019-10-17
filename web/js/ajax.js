@@ -11,21 +11,25 @@ function loadModel(id) {
         document.getElementById("radio").innerHTML = "";
         return;
     }
-
+    
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             xmlDoc = this.responseXML;
-            console.log(xmlDoc);
-            x = xmlDoc.getElementsByTagName("modelovehiculo");
+            
+            x = xmlDoc.getElementsByTagName("modelovehiculo");           
             for (i = 0; i < x.length; i++) {
-                txt = txt + x[i].childNodes[0].nodeValue;
+                txt += "<option value="+x[i].getElementsByTagName("idmodelovehiculo")[0].childNodes[0].nodeValue+">"
+                        + x[i].getElementsByTagName("modelo")[0].childNodes[0].nodeValue + "</option>";
             }
-            document.getElementById("demo").innerHTML = txt;
+            console.log(txt);
+            document.getElementById("inputModel").innerHTML = txt;
         }
     };
 
-    xhttp.open("GET", "/car_record?id=" + id, true);
+    xhttp.open("GET", "updatemodelo?id=" + id, true);
     xhttp.send();
 }
+
+
 
