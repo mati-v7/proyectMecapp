@@ -8,12 +8,10 @@ package session;
 import entity.Persona;
 import entity.Tipousuario;
 import entity.Usuario;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -24,6 +22,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,7 +31,10 @@ import javax.persistence.Query;
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class TransManager {
-
+    
+    @EJB
+    private UsuarioFacade uf;
+    
     @PersistenceContext(unitName = "proyectMecappPU")
     private EntityManager em;
 
@@ -45,9 +47,7 @@ public class TransManager {
         Tipousuario tu;
         final Query query;
         List results;
-        String cript;
         try {
-            cript = encriptPass(pass);
             tu = em.find(Tipousuario.class, 1);
             if (tipo.equals("1")) {
                 //Si el usuario eligio CI, tipo es igual a 1
@@ -56,10 +56,10 @@ public class TransManager {
 
                 if (!results.isEmpty()) {
                     p = (Persona) results.get(0);
-                    addUsuario(cript, p, tu);
+                    addUsuario(pass, p, tu);
                 } else {
                     Persona newPersona = addPersona(nombre, apellido, doc, direccion, telefono, email);
-                    addUsuario(cript, newPersona, tu);
+                    addUsuario(pass, newPersona, tu);
                     p = newPersona;
                 }
             } else if (tipo.equals("2")) {
@@ -70,10 +70,10 @@ public class TransManager {
 
                 if (!results.isEmpty()) {
                     p = (Persona) results.get(0);
-                    addUsuario(cript, p, tu);
+                    addUsuario(pass, p, tu);
                 } else {
                     Persona newPersona = addPersona(nombre, apellido, parts[0], parts[1], direccion, telefono, email);
-                    addUsuario(cript, newPersona, tu);
+                    addUsuario(pass, newPersona, tu);
                     p = newPersona;
                 }
             }
@@ -125,53 +125,50 @@ public class TransManager {
         em.persist(u);
     }
 
-    private String encriptPass(String pass) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] bs = md.digest(pass.getBytes());
-            BigInteger integer = new BigInteger(1, bs);
-            String s = integer.toString(16);
-            while (s.length() < 32) {
-                s = "0" + s;
-            }
-            return s;
-        } catch (NoSuchAlgorithmException ex) {
-            throw new RuntimeException(ex);
-        }
-    }
     
     
-
+    
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Boolean login(String email, String pass) {
+    public Persona login(String email, String pass) {
+        
         try {
             Persona p;
-            List result;
-            Query query;
-            if(!email.isEmpty() || pass.isEmpty()){
-                p  = getUser(email);
+            if(!email.isEmpty() || !pass.isEmpty()){
+                p  = getPersona(email);
                 if(p != null){
-                    
+                    List result = uf.getUserForIdPersona(p);
+                    Usuario u = (Usuario)result.get(0);
+                    if(!u.getPassUsuario().equals(pass)){
+                        //Error de Password
+                        return null;
+                    }
+             
                 }else{
-                 
+                    //Error de Email
+                    return null;
                 }
             }else{
-            
+                //Error de formulario vacio
+                return null;
             }
             
-            return true;
+            return p;
         } catch (Exception e) {
-            return false;
+            return null;
         }
     }
 
-    private Persona getUser(String email) {
+    private Persona getPersona(String email) {
+        Persona p = null;
         try {
-            Persona p = (Persona) em.createNamedQuery("Persona.findByEmailPersona").setParameter("emailPersona", email).getSingleResult();
-            return p;
+            List l = em.createNamedQuery("Persona.findByEmailPersona").setParameter("emailPersona", email).getResultList();
+            if(!l.isEmpty()){
+                p = (Persona)l.get(0);
+            }
         } catch (NoResultException e) {
             return null;
         } 
+        return p;
     }
     
     

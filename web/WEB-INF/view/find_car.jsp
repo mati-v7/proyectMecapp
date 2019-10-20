@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
     Document   : find_car
     Created on : 04/09/2019, 04:28:19 PM
@@ -30,6 +31,7 @@
                             <button name="" type="submit" class="btn btn-primary">Encontrar vehiculo</button>
                         </div>
                     </div>
+                    <p>${info}</p>
                 </form>
             </div>
             <div class="col-xs-12 col-md-6">

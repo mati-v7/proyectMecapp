@@ -22,12 +22,12 @@
 
                     <div class="form-group">
                         <label for="inputChasis" class="sr-only">Chasis</label>
-                        <input type="text" name="" id="inputChasis" class="form-control" placeholder="Chasis"/>
+                        <input type="text" name="txtChasis" id="inputChasis" class="form-control" placeholder="Chasis"/>
                     </div>
 
                     <div class="form-group">
                         <label for="inputChapa" class="sr-only">Chapa</label>
-                        <input type="text" name="" id="inputChapa" class="form-control" placeholder="Chapa"/>
+                        <input type="text" name="txtChapa" id="inputChapa" class="form-control" placeholder="Chapa"/>
                     </div>
 
                     <div class="form-group">
@@ -39,17 +39,17 @@
                     </div>
                     <div class="form-group">
                         <label for="inputAnho" class="sr-only">Año</label>
-                        <input type="text" name="" id="inputAnho" class="form-control" placeholder="Año"/>
+                        <input type="text" name="txtAnho" id="inputAnho" class="form-control" placeholder="Año"/>
                     </div>
 
                     <div class="form-group">
                         <label for="inputKm" class="sr-only">Kilometraje</label>
-                        <input type="text" name="" id="inputKm" class="form-control" placeholder="Kilometraje"/>
+                        <input type="text" name="txtKm" id="inputKm" class="form-control" placeholder="Kilometraje"/>
                     </div>
 
                     <div class="form-group">
                         <label for="inputColor" class="sr-only">Color</label>
-                        <input type="text" name="" id="inputColor" class="form-control" placeholder="Color"/>
+                        <input type="text" name="txtColor" id="inputColor" class="form-control" placeholder="Color"/>
                     </div>
                 </div>
 
@@ -59,7 +59,7 @@
                         <c:forEach var="marca" items="${marcas}">
                             <img src="" class="img-thumbnail"/>
                             <label for="radio1" class="radio-inline">
-                                <input type="radio" name="rdContacto" value="${marca.idmarcaVehiculo}" id="radio" onchange="loadModel(this.value)">${marca.marcaVehiculo}
+                                <input type="radio" name="rdMarca" value="${marca.idmarcaVehiculo}" id="radio" onchange="loadModel(this.value)">${marca.marcaVehiculo}
                             </label>
                         </c:forEach>
                             <p id="demo"></p>

@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import session.MarcavehiculoFacade;
 import session.ModelovehiculoFacade;
 import session.TransManager;
@@ -159,6 +160,7 @@ public class ControllerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         String email, pass;
         String userPath = request.getServletPath();
 
@@ -168,8 +170,16 @@ public class ControllerServlet extends HttpServlet {
                 // TODO: Implementar la solicitud de accion inicio de sesion
                 email = request.getParameter("txtEmail");
                 pass = request.getParameter("txtPass");
-
-                //Boolean flag = transManager.login(email, pass);
+                
+                Persona profile = transManager.login(email, pass);
+                if(profile != null){
+                    session.setAttribute("user", profile);
+                    request.setAttribute("info", session.getAttribute("user"));
+                    userPath = "/find_car";
+                }else{
+                    
+                }
+                
                 break;
 
             //Si se llama a la accion registar usuario
@@ -191,7 +201,13 @@ public class ControllerServlet extends HttpServlet {
             //Si se llama a la accion registrar vehiculo
             case "/registrarVehiculo":
                 // TODO: Implementar la solicitud de acccion registro de vehiculo
-
+                String chasis = request.getParameter("txtChasis");
+                String chapa = request.getParameter("txtChapa");
+                String modelo = request.getParameter("combModelo");
+                String anho = request.getParameter("txtAnho");
+                String km = request.getParameter("txtKm");
+                String color = request.getParameter("txtColor");
+                String marca = request.getParameter("rdMarca");
                 break;
 
             //Si se llama a la accion encontrar vehiculo
