@@ -32,7 +32,7 @@
 
                     <div class="form-group">
                         <label for="inputModel">Modelo</label>
-                        <select class="form-control custom-select" id="inputModel">
+                        <select class="form-control custom-select" id="inputModel" name="model">
                             <option selected>Seleccione una marca para ver modelos</option>
                             
                         </select>
@@ -50,6 +50,9 @@
                     <div class="form-group">
                         <label for="inputColor" class="sr-only">Color</label>
                         <input type="text" name="txtColor" id="inputColor" class="form-control" placeholder="Color"/>
+                    </div>
+                    <div class="form-group">
+                        <button name="" type="submit" class="btn btn-primary">Registrar Vehiculo</button>
                     </div>
                 </div>
 

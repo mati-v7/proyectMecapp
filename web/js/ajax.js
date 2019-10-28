@@ -19,7 +19,7 @@ function loadModel(id) {
             
             x = xmlDoc.getElementsByTagName("modelovehiculo");           
             for (i = 0; i < x.length; i++) {
-                txt += "<option value="+x[i].getElementsByTagName("idmodelovehiculo")[0].childNodes[0].nodeValue+" name='combModelo'>"
+                txt += "<option value="+x[i].getElementsByTagName("idmodelovehiculo")[0].childNodes[0].nodeValue+">"
                         + x[i].getElementsByTagName("modelo")[0].childNodes[0].nodeValue + "</option>";
             }
             console.log(txt);

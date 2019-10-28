@@ -5,9 +5,11 @@
  */
 package session;
 
+import entity.Modelovehiculo;
 import entity.Persona;
 import entity.Tipousuario;
 import entity.Usuario;
+import entity.Vehiculo;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
@@ -31,10 +33,10 @@ import javax.servlet.http.HttpSession;
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class TransManager {
-    
+
     @EJB
     private UsuarioFacade uf;
-    
+
     @PersistenceContext(unitName = "proyectMecappPU")
     private EntityManager em;
 
@@ -87,7 +89,6 @@ public class TransManager {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    
     private Persona addPersona(String nombre, String apellido, String doc, String direccion, String telefono, String email) {
         Persona persona = new Persona();
         persona.setNombrePersona(nombre);
@@ -125,33 +126,30 @@ public class TransManager {
         em.persist(u);
     }
 
-    
-    
-    
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Persona login(String email, String pass) {
-        
+
         try {
             Persona p;
-            if(!email.isEmpty() || !pass.isEmpty()){
-                p  = getPersona(email);
-                if(p != null){
+            if (!email.isEmpty() || !pass.isEmpty()) {
+                p = getPersona(email);
+                if (p != null) {
                     List result = uf.getUserForIdPersona(p);
-                    Usuario u = (Usuario)result.get(0);
-                    if(!u.getPassUsuario().equals(pass)){
+                    Usuario u = (Usuario) result.get(0);
+                    if (!u.getPassUsuario().equals(pass)) {
                         //Error de Password
                         return null;
                     }
-             
-                }else{
+
+                } else {
                     //Error de Email
                     return null;
                 }
-            }else{
+            } else {
                 //Error de formulario vacio
                 return null;
             }
-            
+
             return p;
         } catch (Exception e) {
             return null;
@@ -162,14 +160,46 @@ public class TransManager {
         Persona p = null;
         try {
             List l = em.createNamedQuery("Persona.findByEmailPersona").setParameter("emailPersona", email).getResultList();
-            if(!l.isEmpty()){
-                p = (Persona)l.get(0);
+            if (!l.isEmpty()) {
+                p = (Persona) l.get(0);
             }
         } catch (NoResultException e) {
             return null;
-        } 
+        }
         return p;
     }
-    
-    
+
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public Vehiculo registVehiculo(String chasis, String modelo, String chapa, String anho, String km, String color, Persona p) {
+        Modelovehiculo m = getModelo(modelo);
+        Vehiculo v = addVehiculo(chasis, m, chapa, anho, km, color, p);
+        return v;
+    }
+
+    private Modelovehiculo getModelo(String modelo) {
+        Modelovehiculo mv = null;
+        try {
+            List l = em.createNamedQuery("Modelovehiculo.findByIdmodeloVehiculo").setParameter("idmodeloVehiculo", modelo).getResultList();
+            if (!l.isEmpty()) {
+                mv = (Modelovehiculo) l.get(0);
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return mv;
+    }
+
+    private Vehiculo addVehiculo(String chasis, Modelovehiculo m, String chapa, String anho, String km, String color, Persona p) {
+        Vehiculo v = new Vehiculo();
+        v.setChasisVehiculo(chasis);
+        v.setChapaVehiculo(chapa);
+        v.setAnhoVehiculo(anho);
+        v.setKmVehiculo(Integer.parseInt(km));
+        v.setColorVehiculo(color);
+        v.setModeloVehiculoidmodeloVehiculo(m);
+        v.setPersonaIdpersona(p);
+        em.persist(v);
+        return v;
+    }
+
 }

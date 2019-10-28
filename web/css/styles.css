@@ -9,8 +9,17 @@ and open the template in the editor.
 */
 
 header {
-    background: #2c3e50;
+    background: #2068D6;
     color: #FFFFFF;
-   
+    
 }
 
+footer{
+    background: #424242;
+    color: #FFFFFF;
+}
+
+#copyright{
+    background: #212121;
+    color: #FFFFFF;
+}

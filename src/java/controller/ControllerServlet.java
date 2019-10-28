@@ -7,6 +7,7 @@ package controller;
 
 import entity.Modelovehiculo;
 import entity.Persona;
+import entity.Vehiculo;
 import java.io.IOException;
 import java.util.List;
 import javax.ejb.EJB;
@@ -87,7 +88,7 @@ public class ControllerServlet extends HttpServlet {
             //Si se solicita la pagina de registro vehicular
             case "/car_record":
                 // TODO: Implementar la solicitud de registro vehicular
-                    request.setAttribute("marcas", mf.findAll());
+                request.setAttribute("marcas", mf.findAll());
                 break;
 
             //Si se solicita la pagina de agendamiento
@@ -128,12 +129,12 @@ public class ControllerServlet extends HttpServlet {
                         response.setContentType("text/xml");
                         response.setHeader("Cache-Control", "no-cache");
                         response.getWriter().write("<modelos>" + sb.toString() + "</modelos>");
-                            
+
                     } else {
                         response.setStatus(HttpServletResponse.SC_NO_CONTENT);
                     }
                 }
-                break;         
+                break;
         }
 
         //Usa RequestDispatcher para reenviar la solicitud internamente
@@ -170,16 +171,16 @@ public class ControllerServlet extends HttpServlet {
                 // TODO: Implementar la solicitud de accion inicio de sesion
                 email = request.getParameter("txtEmail");
                 pass = request.getParameter("txtPass");
-                
+
                 Persona profile = transManager.login(email, pass);
-                if(profile != null){
+                if (profile != null) {
                     session.setAttribute("user", profile);
                     request.setAttribute("info", session.getAttribute("user"));
-                    userPath = "/find_car";
-                }else{
-                    
+                    userPath = "/profile";
+                } else {
+                    userPath = "/login";
                 }
-                
+
                 break;
 
             //Si se llama a la accion registar usuario
@@ -203,11 +204,16 @@ public class ControllerServlet extends HttpServlet {
                 // TODO: Implementar la solicitud de acccion registro de vehiculo
                 String chasis = request.getParameter("txtChasis");
                 String chapa = request.getParameter("txtChapa");
-                String modelo = request.getParameter("combModelo");
+                String modelo = request.getParameter("model");
                 String anho = request.getParameter("txtAnho");
                 String km = request.getParameter("txtKm");
                 String color = request.getParameter("txtColor");
-                String marca = request.getParameter("rdMarca");
+
+                Persona p = (Persona) session.getAttribute("user");
+                Vehiculo v = transManager.registVehiculo(chasis, modelo, chapa, anho, km, color, p);
+                session.setAttribute("vehiculo", v);
+                request.setAttribute("info", session.getAttribute("vehiculo"));
+                userPath = "/profile";
                 break;
 
             //Si se llama a la accion encontrar vehiculo
