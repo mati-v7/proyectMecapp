@@ -179,11 +179,11 @@ public class TransManager {
     private Modelovehiculo getModelo(String modelo) {
         Modelovehiculo mv = null;
         try {
-            List l = em.createNamedQuery("Modelovehiculo.findByIdmodeloVehiculo").setParameter("idmodeloVehiculo", modelo).getResultList();
-            if (!l.isEmpty()) {
-                mv = (Modelovehiculo) l.get(0);
+            List list = em.createNamedQuery("Modelovehiculo.findByIdmodeloVehiculo").setParameter("idmodeloVehiculo", Integer.parseInt(modelo)).getResultList();
+            if (!list.isEmpty()) {
+                mv = (Modelovehiculo) list.get(0);
             }
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             return null;
         }
         return mv;
@@ -199,6 +199,7 @@ public class TransManager {
         v.setModeloVehiculoidmodeloVehiculo(m);
         v.setPersonaIdpersona(p);
         em.persist(v);
+        em.flush();
         return v;
     }
 

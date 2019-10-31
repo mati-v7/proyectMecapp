@@ -16,23 +16,31 @@
 
         <div class="row">
             <div class="col-xs-12 col-md-6">
-                <h2>Encontrar mi Vehiculo</h2>
-                <form action="encontrarVehiculo" method="post">
-                    <div class="form-group">
-                        <label for="inputChasis" class="sr-only">Numero de Chasis</label>
-                        <input type="text" name="" id="inputChasis" class="form-control" placeholder="Chasis" aria-describedby="chasisHelp"/>
-                        <small id="chasisHelp" class="form-text text-muted">
-                            Ingrese los 17 dígitos de su número de CHASIS que se encuentra en la Cédula de Identificación del Vehículo.
-                        </small>
-                    </div>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Chasis</th>
+                            <th scope="col">Chapa</th>
+                            <th scope="col">Km</th>
+                            <th scope="col">Año</th>
+                            <th scope="col">Color</th>
 
-                    <div class="form-group">
-                        <div class="col-md-6">
-                            <button name="" type="submit" class="btn btn-primary">Encontrar vehiculo</button>
-                        </div>
-                    </div>
-                    <p>${info}</p>
-                </form>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="vehiculo" items="${vehiculos}">
+                            <tr>
+                                <td>${vehiculo.idvehiculo}</td>
+                                <td>${vehiculo.chasisVehiculo}</td>
+                                <td>${vehiculo.chapaVehiculo}</td>
+                                <td>${vehiculo.kmVehiculo}</td>
+                                <td>${vehiculo.anhoVehiculo}</td>
+                                <td>${vehiculo.colorVehiculo}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
             </div>
             <div class="col-xs-12 col-md-6">
                 <h2>¿Aún no registró su vehiculo?</h2>
@@ -40,7 +48,7 @@
                     ¡Registrelo de forma facil con pocos pasos!
                 </p>
                 <div class="form-group">
-                    <a href="car_record" class="btn btn-secondary" role="button">Registrar</a>
+                    <a href="car_record" class="btn btn-secondary" role="button">Registrar Vehiculo</a>
                 </div>
             </div>
         </div>

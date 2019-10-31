@@ -15,7 +15,7 @@
         <url-pattern>/login</url-pattern>
         <url-pattern>/customer_record</url-pattern>
         <url-pattern>/car_record</url-pattern>
-        <url-pattern>/find_car</url-pattern>
+        <url-pattern>/profile</url-pattern>
         <url-pattern>/visit_registration</url-pattern>
         <url-pattern>/confirmation</url-pattern>
         <!--Acciones -->

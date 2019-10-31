@@ -77,6 +77,7 @@ public class Reserva implements Serializable {
     @JoinColumn(name = "vehiculo_idvehiculo", referencedColumnName = "idvehiculo")
     @ManyToOne(optional = false)
     private Vehiculo vehiculoIdvehiculo;
+    
 
     public Reserva() {
     }

@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import session.MarcavehiculoFacade;
 import session.ModelovehiculoFacade;
 import session.TransManager;
+import session.VehiculoFacade;
 
 /**
  *
@@ -32,7 +33,7 @@ import session.TransManager;
             "/customer_record",
             "/car_record",
             "/visit_registration",
-            "/find_car",
+            "/profile",
             "/confirmation",
             "/iniciarSesion",
             "/registrarUsuario",
@@ -49,6 +50,8 @@ public class ControllerServlet extends HttpServlet {
     private ModelovehiculoFacade modf;
     @EJB
     private TransManager transManager;
+    @EJB
+    private VehiculoFacade vehiculoFacade;
 
     boolean flag = false;
     boolean added = false;
@@ -97,9 +100,9 @@ public class ControllerServlet extends HttpServlet {
                 break;
 
             //Si se solicita la pagina para encontrar el vehiculo registrado
-            case "/find_car":
+            case "/profile":
                 // TODO: Implementar la solicitud de encontrar vehiculo
-
+                request.setAttribute("vehiculos", vehiculoFacade.findAll());
                 break;
 
             //Si se solicita la pagina de resumen de cita
@@ -225,7 +228,7 @@ public class ControllerServlet extends HttpServlet {
             //Si se llama a la accion confirmar cita
             case "/confirmarCita":
                 // TODO: Implementar la solicitud de accion confirmar cita
-
+                
                 break;
         }
 
