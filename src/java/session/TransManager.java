@@ -131,7 +131,7 @@ public class TransManager {
 
         try {
             Persona p;
-            if (!email.isEmpty() || !pass.isEmpty()) {
+            if (!email.isEmpty() && !pass.isEmpty()) {
                 p = getPersona(email);
                 if (p != null) {
                     List result = uf.getUserForIdPersona(p);

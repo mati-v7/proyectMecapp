@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1><img src="img/registro/logo1.png" height="50" 
+      alt="mdb logo"></h1>
     </body>
 </html>

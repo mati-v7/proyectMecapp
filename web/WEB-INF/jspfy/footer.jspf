@@ -10,21 +10,21 @@
       <!-- Grid column -->
       <div class="col-md-6 mt-md-0 mt-3">
         <!-- Content -->
-        <h5 class="text-uppercase">Footer Content</h5>
-        <p>Here you can use rows and columns to organize your footer content.</p>
+        <h5 class="text-uppercase">Mecapp</h5>
+        <p>Desarrollado por nosotros</p>
       </div>
       <!-- Grid column -->
       <hr class="clearfix w-100 d-md-none pb-3">
       <!-- Grid column -->
       <div class="col-md-3 mb-md-0 mb-3">
         <!-- Links -->
-        <h5 class="text-uppercase">Links</h5>
+        <h5 class="text-uppercase">Suscribite</h5>
         <ul class="list-unstyled">
           <li>
-            <a href="#!">Link 1</a>
+            <a href="#!">Facebook</a>
           </li>
           <li>
-            <a href="#!">Link 2</a>
+            <a href="#!">Intagram</a>
           </li>
           <li>
             <a href="#!">Link 3</a>
