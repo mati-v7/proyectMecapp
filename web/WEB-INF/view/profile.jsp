@@ -5,16 +5,17 @@
     Author     : Windows10
 --%>
 
+
 <body>
     <header>
         <!--Navbar -->
-        
+
         <nav class=" navbar navbar-expand-lg  navbar-dark danger-color ">
             <a class="navbar-brand" href="#">
-            <img src="img/registro/logo1.png" height="50" 
-      alt="mdb logo">
+                <img src="img/registro/logo1.png" height="50" 
+                     alt="mdb logo">
             </a>
-            
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
                     aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -29,7 +30,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Estado</a>
                     </li>
-                   
+
                 </ul>
                 <ul class="navbar-nav ml-auto nav-flex-icons">
                     <li class="nav-item dropdown">
@@ -40,14 +41,14 @@
                         <div class="dropdown-menu dropdown-menu-right dropdown-default"
                              aria-labelledby="navbarDropdownMenuLink-333">
                             <a class="dropdown-item" href="customer_record">Configuracion</a>
-                            <a class="dropdown-item" href="index">Cerrar Sesion</a>
-                            
+                            <a class="dropdown-item" href="cerrarsesion">Cerrar Sesion</a>
+
                         </div>
                     </li>
                 </ul>
             </div>
         </nav>
-    
+
         <!--/.Navbar -->
     </header>
 
@@ -55,7 +56,9 @@
 
         <div class="row">
             <div class="col-xs-12 col-md-6">
+                <h2>Bienveido/a: <c:out value="${sessionScope.user.nombrePersona}"/></h2>
                 <table class="table table-sm">
+
                     <thead>
                         <tr>
                             <th scope="col">#</th>

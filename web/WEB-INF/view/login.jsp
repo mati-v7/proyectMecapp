@@ -4,55 +4,66 @@
     Author     : Windows10
 --%>
 
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimun-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="icon" href="img/registro/logo.png" />
+        <link rel="stylesheet" type="text/css" href="css/loginstyles.css">
+        <title>Mecapp</title>
+    </head>
 
-<body class="">
+    <body class="text-center">
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#loginForm").validate({
+                    rules: {
+                        inputEmail: {
+                            required: true,
+                            email: true
+                        },
+                        inputPassword: {
+                            required: true,
+                            password: true
+                        }
+                    }
+                });
+            });
+        </script>
+        <!--Formulario Login-->
+        <div class="main">
+            <form action="iniciarSesion" method="post" id="loginForm" class="form-signin">
+                <img class="mb-4" src="img/registro/logo1.png" alt="" height="72"/>
+                <h2 class="h2 mb-3">Iniciar Sesión</h2>
 
-    <header>
-        <div class="container">
-            <h1><img src="img/registro/logo1.png" height="50" 
-      alt="mdb logo"></h1>
-        </div>
-    </header>
+                <div class="form-group">
+                    <label for="inputEmail" class="sr-only">Dirección de correo electrónico</label>
+                    <input type="email" name="txtEmail" id="inputEmail" class="form-control" placeholder="Correo electrónico" />
+                </div>
 
-    <!--Formulario Login-->
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <form action="iniciarSesion" method="post" class="form-singin">
-
-                    <h2 class="h2 mb-3">Iniciar Sesión</h2>
-
-                    <div class="form-group">
-                        <label for="inputEmail" class="sr-only">Dirección de correo electrónico</label>
-                        <input type="email" name="txtEmail" id="inputEmail" class="form-control" placeholder="Correo electrónico" />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputPassword" class="sr-only">Contraseña</label>
-                        <input type="password" name="txtPass" id="inputPassword" class="form-control" placeholder="Contraseña" />
-                    </div>
+                <div class="form-group">
+                    <label for="inputPassword" class="sr-only">Contraseña</label>
+                    <input type="password" name="txtPass" id="inputPassword" class="form-control" placeholder="Contraseña" />
+                </div>
 
 
-                    <div class="form-group">
-                        <button name="" type="submit" class="btn btn-primary">Iniciar Sesion</button>
-                    </div>
-                    
-                </form>
-            </div>
-            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <button name="" type="submit" class="btn btn-primary">Iniciar Sesion</button>
+                    <a href="customer_record" class="btn btn-secondary" role="button">Registrarse</a>
+                </div>
+                <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+            </form>
+        </form>
 
-                <form action="customer_record" method="get" class="">
-                    <h2>¿Aún no esta Registrado?</h2>
-                    <p>
-                        ¡Registrese de forma facil con pocos pasos!
-                    </p>
-                    <div class="form-group">
-                        <a href="customer_record" class="btn btn-secondary" role="button">Registrarse</a>
-                    </div>
-                </form> 
-            </div>
-        </div>
     </div>
+</body>
+<script src="js/jquery.validate.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html> 
 
 
 

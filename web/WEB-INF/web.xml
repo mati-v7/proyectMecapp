@@ -25,6 +25,7 @@
         <url-pattern>/encontrarVehiculo</url-pattern>
         <url-pattern>/confirmarCita</url-pattern>
         <url-pattern>/updatemodelo</url-pattern>
+        <url-pattern>/cerrarsesion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -35,7 +36,11 @@
         <jsp-property-group>
             <description>header and footer settings</description>
             <url-pattern>/index.jsp</url-pattern>
-            <url-pattern>/WEB-INF/view/*</url-pattern>
+            <url-pattern>/WEB-INF/view/profile.jsp</url-pattern>
+            <url-pattern>/WEB-INF/view/car_record.jsp</url-pattern>
+            <url-pattern>/WEB-INF/view/customer_record.jsp</url-pattern>
+            <url-pattern>/WEB-INF/view/visit_registration.jsp</url-pattern>
+            <url-pattern>/WEB-INF/view/confirmation.jsp</url-pattern>
             <include-prelude>/WEB-INF/jspfy/header.jspf</include-prelude>
             <include-coda>/WEB-INF/jspfy/footer.jspf</include-coda>
         </jsp-property-group>

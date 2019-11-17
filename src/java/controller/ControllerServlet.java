@@ -40,7 +40,8 @@ import session.VehiculoFacade;
             "/registrarVehiculo",
             "/encontrarVehiculo",
             "/confirmarCita",
-            "/updatemodelo"
+            "/updatemodelo",
+            "/cerrarsesion"
         })
 public class ControllerServlet extends HttpServlet {
 
@@ -102,8 +103,20 @@ public class ControllerServlet extends HttpServlet {
             //Si se solicita la pagina para encontrar el vehiculo registrado
             case "/profile":
                 // TODO: Implementar la solicitud de encontrar vehiculo
-                request.setAttribute("vehiculos", vehiculoFacade.findAll());
+                HttpSession session = request.getSession(false);
+                Persona p = (Persona)session.getAttribute("user");
+                if (session != null) {
+                    request.setAttribute("vehiculos", vehiculoFacade.getVehiculoForPersona(p));
+                } else {
+                    userPath = "/login";
+                }
                 break;
+
+            case "/cerrarsesion":
+                session = request.getSession(false);
+                session.invalidate();
+                response.sendRedirect("");
+                return;
 
             //Si se solicita la pagina de resumen de cita
             case "/confirmation":
@@ -113,25 +126,24 @@ public class ControllerServlet extends HttpServlet {
             case "/updatemodelo":
                 String targetId = request.getParameter("id");
                 StringBuilder sb = new StringBuilder();
-
+                Modelovehiculo modelo;
                 if (!targetId.equals("")) {
                     List result = modf.getModeloForMarca(Integer.parseInt(targetId));
                     if (!result.isEmpty()) {
                         for (int i = 0; i < result.size(); i++) {
-                            Modelovehiculo modelo = (Modelovehiculo) result.get(i);
+                            modelo = (Modelovehiculo) result.get(i);
                             sb.append("<modelovehiculo>");
                             sb.append("<idmodelovehiculo>").append(modelo.getIdmodeloVehiculo()).append("</idmodelovehiculo>");
                             sb.append("<modelo>").append(modelo.getModeloVehiculo()).append("</modelo>");
                             sb.append("</modelovehiculo>");
                         }
                         added = true;
-                    } else {
-                        added = false;
                     }
                     if (added) {
                         response.setContentType("text/xml");
                         response.setHeader("Cache-Control", "no-cache");
                         response.getWriter().write("<modelos>" + sb.toString() + "</modelos>");
+                        return;
 
                     } else {
                         response.setStatus(HttpServletResponse.SC_NO_CONTENT);
@@ -144,12 +156,10 @@ public class ControllerServlet extends HttpServlet {
         String url = "/WEB-INF/view" + userPath + ".jsp";
 
         try {
-            if (!userPath.equals("/updatemodelo")) {
-                request.getRequestDispatcher(url).forward(request, response);
-            }
+            request.getRequestDispatcher(url).forward(request, response);
 
         } catch (IOException | ServletException e) {
-            e.printStackTrace();
+
         }
     }
 
@@ -164,7 +174,7 @@ public class ControllerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
+
         String email, pass;
         String userPath = request.getServletPath();
 
@@ -177,14 +187,14 @@ public class ControllerServlet extends HttpServlet {
 
                 Persona profile = transManager.login(email, pass);
                 if (profile != null) {
+                    HttpSession session = request.getSession();
                     session.setAttribute("user", profile);
                     request.setAttribute("info", session.getAttribute("user"));
-                    userPath = "/profile";
+                    response.sendRedirect("profile");
                 } else {
-                    userPath = "/login";
+                    response.sendRedirect("login");
                 }
-
-                break;
+                return;
 
             //Si se llama a la accion registar usuario
             case "/registrarUsuario":
@@ -212,12 +222,18 @@ public class ControllerServlet extends HttpServlet {
                 String km = request.getParameter("txtKm");
                 String color = request.getParameter("txtColor");
 
+                HttpSession session = request.getSession(false);
                 Persona p = (Persona) session.getAttribute("user");
                 Vehiculo v = transManager.registVehiculo(chasis, modelo, chapa, anho, km, color, p);
-                session.setAttribute("vehiculo", v);
-                request.setAttribute("info", session.getAttribute("vehiculo"));
-                userPath = "/profile";
-                break;
+                if (v != null) {
+                    session.setAttribute("vehiculo", v);
+                    request.setAttribute("info", session.getAttribute("vehiculo"));
+                    response.sendRedirect("profile");
+                    return;
+                }else{
+                    userPath = "/profile";
+                }
+
 
             //Si se llama a la accion encontrar vehiculo
             case "/encontrarVehiculo":
@@ -228,7 +244,7 @@ public class ControllerServlet extends HttpServlet {
             //Si se llama a la accion confirmar cita
             case "/confirmarCita":
                 // TODO: Implementar la solicitud de accion confirmar cita
-                
+
                 break;
         }
 
@@ -238,7 +254,7 @@ public class ControllerServlet extends HttpServlet {
         try {
             request.getRequestDispatcher(url).forward(request, response);
         } catch (IOException | ServletException e) {
-            e.printStackTrace();
+
         }
 
     }
