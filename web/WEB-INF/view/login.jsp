@@ -4,6 +4,7 @@
     Author     : Windows10
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -38,24 +39,24 @@
         <div class="card">
             <form action="iniciarSesion" method="post" id="loginForm" class="form-signin">
                 <img class="mb-4" src="img/registro/logo1.png" alt="" height="72"/>
-                <h2 class="h2 mb-3">Iniciar Sesión</h2>
+                <h2 class="h2 mb-3"><fmt:message key="tituloLogin"/></h2>
 
                 <div class="form-group">
-                    <label for="inputEmail" class="sr-only">Dirección de correo electrónico</label>
-                    <input type="email" name="txtEmail" id="inputEmail" class="form-control" placeholder="Correo electrónico" />
+                    <label for="inputEmail" class="sr-only"><fmt:message key="inputEmail"/></label>
+                    <input type="email" name="txtEmail" id="inputEmail" class="form-control" placeholder="<fmt:message key="inputEmail"/>" />
                 </div>
 
                 <div class="form-group">
-                    <label for="inputPassword" class="sr-only">Contraseña</label>
-                    <input type="password" name="txtPass" id="inputPassword" class="form-control" placeholder="Contraseña" />
+                    <label for="inputPassword" class="sr-only"><fmt:message key="inputPassword"/></label>
+                    <input type="password" name="txtPass" id="inputPassword" class="form-control" placeholder="<fmt:message key="inputPassword"/>" />
                 </div>
 
 
                 <div class="form-group">
-                    <button name="" type="submit" class="btn btn-primary">Iniciar Sesion</button>
-                    <a href="customer_record" class="btn btn-secondary" role="button">Registrarse</a>
+                    <button name="" type="submit" class="btn btn-primary"><fmt:message key="btnLogin"/></button>
+                    <a href="customer_record" class="btn btn-secondary" role="button"><fmt:message key="btnRegistrarse"/></a>
                 </div>
-                <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+                    <p class="mt-5 mb-3 text-muted"><fmt:message key="copyright"/></p>
             </form>
         </form>
 
