@@ -15,7 +15,8 @@
     </head>
 
     <body class="text-center">
-        <script type="text/javascript">
+        
+            <script type="text/javascript">
             $(document).ready(function () {
                 $("#loginForm").validate({
                     rules: {
@@ -30,9 +31,11 @@
                     }
                 });
             });
-        </script>
+        
+            </script>
+           
         <!--Formulario Login-->
-        <div class="main">
+        <div class="card">
             <form action="iniciarSesion" method="post" id="loginForm" class="form-signin">
                 <img class="mb-4" src="img/registro/logo1.png" alt="" height="72"/>
                 <h2 class="h2 mb-3">Iniciar Sesión</h2>
