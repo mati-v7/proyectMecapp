@@ -17,7 +17,8 @@
         </div>
     </header>
 
-    <div class="container">
+    <div class="container-fluid">
+        <div class="card"
         <form action="confirmation" method="GET">
             <h2>Agendamiento</h2>
             <div class="row">
@@ -72,5 +73,6 @@
                 </div>
             </div>
         </form>
+    </div>
     </div>
 
