@@ -11,15 +11,18 @@ and open the template in the editor.
 header {
     background: #183ABF;
     color: #000000;
+    padding-left: 240px
     
 }
 
 footer{
     background: #424242;
     color: #FFFFFF;
+    padding-left: 240px
 }
 
 #copyright{
     background: #212121;
     color: #FFFFFF;
 }
+

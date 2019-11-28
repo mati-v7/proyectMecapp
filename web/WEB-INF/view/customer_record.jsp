@@ -13,9 +13,11 @@
     </header>
 
     <div class="container">
+        
         <form action="registrarUsuario" method="post" class="form-horizontal">
-            <div class="form-row">
-                <div class="col-xs-12 col-md-6">
+            <div class="row clearfix">
+                <div class="col-sm-12 col-md-6">
+                    <div class="card">
                     <h2>Datos Personales</h2>
                     <div class="form-group">
                         <label for="inputName" class="sr-only">Nombre</label>
@@ -48,9 +50,9 @@
                         <input type="password" name="" class="form-control" placeholder="Reescriba la contraseña" required>
                     </div>
 
-                </div>
+                
 
-                <div class="col-xs-12 col-md-6">
+               <div class="col-md-12">
                     <h2>¿Como te contactamos?</h2>
 
                     <div class="form-group">
@@ -67,7 +69,7 @@
                         <label for="inputEmail" class="sr-only">Correo electronico</label>
                         <input type="email" name="txtEmail" id="inputEmail" class="form-control" placeholder="Correo electronico" required>
                     </div>    
-
+                </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -78,5 +80,6 @@
 
         </form>
     </div>
-
+            </div>
+        </body>
 
